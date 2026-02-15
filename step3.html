@@ -147,11 +147,10 @@
 
     <h2>Part 3 of 3 — Make It Persistent</h2>
 
-    <p>Your backup script now runs automatically every 60 seconds. But there's one problem — if you close your terminal or your SSH session drops, the script stops. Let's fix that.</p>
+    <p>Only one step remain, if you leave, the script stops. Let's fix that.</p>
 
     <div class="step">
-        <div class="step-header">Launch the script persistently with nohup</div>
-        <p>Use <code>nohup</code> to run the backup script in the background. This ensures the process continues running even if you disconnect from the server or close your terminal window.</p>
+        <div class="step-header">Launch the automation script in the background using nohup</div>
         <pre>nohup bash backup.sh &gt; /dev/null 2&gt;&amp;1 &amp;</pre>
     </div>
 
