@@ -160,13 +160,15 @@
 
     <div class="step">
         <div class="step-header">Modify the script to run in a loop with timestamps</div>
-        <p>Update your <code>backup.sh</code> make it to run every 60 seconds with a timestamp. </p>
+        <p>Update your <code>backup.sh</code> to run every 60 seconds with a timestamp. </p>
         <p>Replace the contents of <code>backup.sh</code> with:</p>
         <pre>#!/bin/bash
 while true; do
     zip -r "backup_$(date +%Y%m%d_%H%M%S).zip" .
     sleep 60
-done
+done</pre>
+    </div>
+
     <div class="next-page">
         <a href="../page3">Continue to Part 3: Make It Persistent →</a>
         <p>Once you've updated the script, move on to the final page to ensure it keeps running even after you disconnect.</p>
