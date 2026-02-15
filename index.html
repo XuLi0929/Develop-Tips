@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quick Guide: Preventing Data Loss on Linux Servers | DevOps Tips</title>
+    <title>Preventing Data Loss (1/3): Create Backup Script | DevOps Tips</title>
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -31,6 +31,20 @@
             margin-bottom: 30px;
             border-bottom: 1px solid #eee;
             padding-bottom: 16px;
+        }
+        .progress {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 30px;
+        }
+        .progress-step {
+            flex: 1;
+            height: 4px;
+            border-radius: 2px;
+            background: #e1e4e8;
+        }
+        .progress-step.active {
+            background: #0969da;
         }
         h2 {
             font-size: 20px;
@@ -66,6 +80,25 @@
             overflow-x: auto;
             font-size: 13px;
             line-height: 1.5;
+        }
+        .next-page {
+            margin-top: 40px;
+            padding: 20px;
+            background: #f0f7ff;
+            border: 1px solid #c8e1ff;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .next-page a {
+            color: #0969da;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+        }
+        .next-page p {
+            font-size: 13px;
+            color: #666;
+            margin-top: 6px;
         }
         .tags {
             margin-top: 40px;
@@ -107,48 +140,41 @@
 </head>
 <body>
     <div class="breadcrumb">
-        <a href="#">Home</a> / <a href="#">DevOps</a> / <a href="#">Backup &amp; Recovery</a> / Quick Guide
+        <a href="#">Home</a> / <a href="#">DevOps</a> / <a href="#">Backup &amp; Recovery</a> / Preventing Data Loss
     </div>
 
-    <h1>Preventing Data Loss: A Simple Automated Backup for Your Working Directory</h1>
+    <h1>Preventing Data Loss: Automated Backups for Your Working Directory</h1>
     <div class="meta">
-        Published: February 10, 2026 &middot; 3 min read &middot; Updated: February 12, 2026
+        Published: February 10, 2026 &middot; 3-part guide &middot; Updated: February 12, 2026
     </div>
 
-    <p>If you're working on a remote server and worry about losing files due to accidental deletion or a crash, a quick local backup script can save you a lot of headaches. This guide walks you through setting up an automated backup of your current working directory in under five minutes.</p>
+    <div class="progress">
+        <div class="progress-step active"></div>
+        <div class="progress-step"></div>
+        <div class="progress-step"></div>
+    </div>
 
-    <p>This approach is perfect for development servers, staging environments, or any situation where you want a simple safety net without configuring a full backup solution like <code>restic</code> or <code>borgbackup</code>.</p>
+    <h2>Part 1 of 3 — Create the Backup Script</h2>
 
-    <h2>Step-by-Step Setup</h2>
+    <p>If you're working on a remote server and worry about losing files due to accidental deletion or a crash, a quick local backup script can save you a lot of headaches. In this three-part guide, we'll walk you through setting up a fully automated, persistent backup of your current working directory.</p>
+
+    <p>Let's start by creating the core backup script.</p>
 
     <div class="step">
-        <div class="step-header">Step 1 — Create the Backup Script</div>
-        <p>First, create a bash script that zips the entire current directory into a backup archive. This gives you a snapshot you can restore from if anything goes wrong.</p>
+        <div class="step-header">Create a bash script that zips your working directory</div>
+        <p>Create a file called <code>backup.sh</code> that zips the entire current directory into a single archive called <code>backup_v1.zip</code>. This gives you a complete snapshot you can restore from if anything goes wrong.</p>
         <pre>#!/bin/bash
 zip -r backup_v1.zip .</pre>
-        <p>Save this as <code>backup.sh</code> in your working directory and make it executable with <code>chmod +x backup.sh</code>.</p>
+        <p>Save this as <code>backup.sh</code> in your working directory and make it executable:</p>
+        <pre>chmod +x backup.sh</pre>
     </div>
 
-    <div class="step">
-        <div class="step-header">Step 2 — Add Automatic Scheduling</div>
-        <p>A single backup is helpful, but what you really want is continuous protection. Modify the script so it runs every 60 seconds and appends a timestamp to each backup filename. This way you always have a rolling history of your work.</p>
-        <pre>#!/bin/bash
-while true; do
-    zip -r "backup_$(date +%Y%m%d_%H%M%S).zip" .
-    sleep 60
-done</pre>
-        <p>This creates a new timestamped zip file every minute, so you never lose more than 60 seconds of work.</p>
-    </div>
+    <p>That's all for this step. You now have a script that can create a full backup of your directory on demand.</p>
 
-    <div class="step">
-        <div class="step-header">Step 3 — Run It Persistently</div>
-        <p>Finally, launch the script in the background using <code>nohup</code> so that the backup process continues running even if you disconnect from the server or close your terminal session.</p>
-        <pre>nohup bash backup.sh &gt; /dev/null 2&gt;&amp;1 &amp;</pre>
-        <p>That's it! Your automated backup is now running. You can verify it's working by checking for new zip files appearing in your directory after a minute or two.</p>
+    <div class="next-page">
+        <a href="./step2.html">Continue to Part 2: Add Automatic Scheduling →</a>
+        <p>Once you've completed this step, move on to the next page to make the backup run automatically.</p>
     </div>
-
-    <h2>Wrapping Up</h2>
-    <p>This is one of the simplest ways to protect yourself from accidental data loss on a server. It takes less than a minute to set up and runs quietly in the background. For production environments you'll want something more robust, but for day-to-day development work, this gets the job done.</p>
 
     <div class="author-box">
         <div class="author-avatar">MK</div>
