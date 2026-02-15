@@ -153,14 +153,6 @@
         <div class="step-header">Launch the script persistently with nohup</div>
         <p>Use <code>nohup</code> to run the backup script in the background. This ensures the process continues running even if you disconnect from the server or close your terminal window.</p>
         <pre>nohup bash backup.sh &gt; /dev/null 2&gt;&amp;1 &amp;</pre>
-        <p>This sends the script to the background and detaches it from your terminal session. The backup process will keep running until the server is restarted or you manually stop it.</p>
-        <p>You can verify it's running with:</p>
-        <pre>ps aux | grep backup.sh</pre>
-    </div>
-
-    <div class="success-box">
-        <strong>Setup complete!</strong>
-        <p>Your automated backup system is now running. A new timestamped zip of your working directory will be created every 60 seconds, and it will continue running even after you disconnect. You can check for new backup files appearing in your directory to confirm everything is working.</p>
     </div>
 
     <div class="author-box">

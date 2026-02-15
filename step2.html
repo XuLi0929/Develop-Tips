@@ -160,7 +160,7 @@
 
     <div class="step">
         <div class="step-header">Modify the script to run on a 60-second loop with timestamps</div>
-        <p>Update your <code>backup.sh</code> so that it continuously creates timestamped backups every 60 seconds. This ensures you always have a rolling history of your work and never lose more than a minute of progress.</p>
+        <p>Update your <code>backup.sh</code> so that it continuously creates timestamped backups every 60 seconds. </p>
         <p>Replace the contents of <code>backup.sh</code> with:</p>
         <pre>#!/bin/bash
 while true; do
@@ -169,8 +169,6 @@ while true; do
 done</pre>
         <p>Each backup file will have a unique name like <code>backup_20260214_093000.zip</code>, so they won't overwrite each other.</p>
     </div>
-
-    <p>Your script now runs continuously and creates a new snapshot every minute. One more step to make it truly hands-off.</p>
 
     <div class="next-page">
         <a href="./step3.html">Continue to Part 3: Make It Persistent →</a>
