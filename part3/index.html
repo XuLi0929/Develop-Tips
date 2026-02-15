@@ -81,6 +81,7 @@
             font-size: 13px;
             line-height: 1.5;
         }
+        pre .comment { color: #6a737d; }
         .success-box {
             margin-top: 30px;
             padding: 20px;
@@ -147,10 +148,19 @@
 
     <h2>Part 3 of 3 — Make It Persistent</h2>
 
-    <p>Only one step remain, if you leave, the script stops. Let's fix that.</p>
+    <p>Only one step remains — if you disconnect or close your terminal, the backup script stops. Let's fix that.</p>
 
     <div class="step">
-        <div class="step-header">Launch the automation script in the background using nohup</div>
+        <div class="step-header">Launch the automation script in the background using nohup</div>
+        <p>Run the following to detach the script from your terminal session:</p>
+        <pre><span class="comment"># Run backup.sh persistently in the background</span>
+nohup bash backup.sh > /dev/null 2>&1 &</pre>
+        <p>You can verify it's running with:</p>
+        <pre>ps aux | grep backup.sh</pre>
+    </div>
+
+    <div class="success-box">
+        <strong>Setup complete!</strong> Your automated backup is now running persistently. A new timestamped zip will be created every 60 seconds, even after you disconnect.
     </div>
 
     <div class="author-box">
