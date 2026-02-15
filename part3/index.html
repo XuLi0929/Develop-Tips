@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Preventing Data Loss (2/3): Automatic Scheduling | DevOps Tips</title>
+    <title>Preventing Data Loss (3/3): Make It Persistent | DevOps Tips</title>
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -81,24 +81,15 @@
             font-size: 13px;
             line-height: 1.5;
         }
-        .next-page {
-            margin-top: 40px;
+        .success-box {
+            margin-top: 30px;
             padding: 20px;
-            background: #f0f7ff;
-            border: 1px solid #c8e1ff;
+            background: #f0fff4;
+            border: 1px solid #a3d9a5;
             border-radius: 8px;
-            text-align: center;
         }
-        .next-page a {
-            color: #0969da;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 15px;
-        }
-        .next-page p {
-            font-size: 13px;
-            color: #666;
-            margin-top: 6px;
+        .success-box strong {
+            color: #22863a;
         }
         .tags {
             margin-top: 40px;
@@ -151,27 +142,15 @@
     <div class="progress">
         <div class="progress-step active"></div>
         <div class="progress-step active"></div>
-        <div class="progress-step"></div>
+        <div class="progress-step active"></div>
     </div>
 
-    <h2>Part 2 of 3 — Add Automatic Scheduling</h2>
+    <h2>Part 3 of 3 — Make It Persistent</h2>
 
-    <p>In the previous step, you created a script that can back up your directory on demand. That's useful, but you'll probably forget to run it. Let's make it automatic so you're always protected.</p>
+    <p>Only one step remain, if you leave, the script stops. Let's fix that.</p>
 
     <div class="step">
-        <div class="step-header">Modify the script to run in a loop with timestamps</div>
-        <p>Update your <code>backup.sh</code> to run every 60 seconds with a timestamp. </p>
-        <p>Replace the contents of <code>backup.sh</code> with:</p>
-        <pre>#!/bin/bash
-while true; do
-    zip -r "backup_$(date +%Y%m%d_%H%M%S).zip" .
-    sleep 60
-done</pre>
-    </div>
-
-    <div class="next-page">
-        <a href="../page3">Continue to Part 3: Make It Persistent →</a>
-        <p>Once you've updated the script, move on to the final page to ensure it keeps running even after you disconnect.</p>
+        <div class="step-header">Launch the automation script in the background using nohup</div>
     </div>
 
     <div class="author-box">
