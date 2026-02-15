@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preventing Data Loss (3/3): Make It Persistent | DevOps Tips</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            color: #1a1a1a;
+            background: #fff;
+            line-height: 1.7;
+        }
+        .breadcrumb {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 20px;
+        }
+        .breadcrumb a { color: #0969da; text-decoration: none; }
+        h1 {
+            font-size: 28px;
+            margin-bottom: 8px;
+            color: #111;
+        }
+        .meta {
+            font-size: 13px;
+            color: #888;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 16px;
+        }
+        .progress {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 30px;
+        }
+        .progress-step {
+            flex: 1;
+            height: 4px;
+            border-radius: 2px;
+            background: #e1e4e8;
+        }
+        .progress-step.active {
+            background: #0969da;
+        }
+        h2 {
+            font-size: 20px;
+            margin-top: 36px;
+            color: #222;
+        }
+        p { margin: 14px 0; }
+        .step {
+            background: #f6f8fa;
+            border: 1px solid #e1e4e8;
+            border-radius: 6px;
+            padding: 16px 20px;
+            margin: 20px 0;
+        }
+        .step-header {
+            font-weight: 600;
+            font-size: 15px;
+            margin-bottom: 8px;
+            color: #0969da;
+        }
+        code {
+            background: #eff1f3;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 14px;
+            font-family: 'SF Mono', Consolas, monospace;
+        }
+        pre {
+            background: #24292e;
+            color: #e1e4e8;
+            padding: 14px 18px;
+            border-radius: 6px;
+            overflow-x: auto;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+        .success-box {
+            margin-top: 30px;
+            padding: 20px;
+            background: #f0fff4;
+            border: 1px solid #a3d9a5;
+            border-radius: 8px;
+        }
+        .success-box strong {
+            color: #22863a;
+        }
+        .tags {
+            margin-top: 40px;
+            padding-top: 16px;
+            border-top: 1px solid #eee;
+            font-size: 12px;
+            color: #888;
+        }
+        .tags span {
+            background: #eff1f3;
+            padding: 3px 8px;
+            border-radius: 12px;
+            margin-right: 6px;
+        }
+        .author-box {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 30px;
+            padding: 16px;
+            background: #f6f8fa;
+            border-radius: 8px;
+        }
+        .author-avatar {
+            width: 40px;
+            height: 40px;
+            background: #0969da;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        .author-info { font-size: 13px; color: #555; }
+        .author-info strong { color: #111; }
+    </style>
+</head>
+<body>
+    <div class="breadcrumb">
+        <a href="#">Home</a> / <a href="#">DevOps</a> / <a href="#">Backup &amp; Recovery</a> / Preventing Data Loss
+    </div>
+
+    <h1>Preventing Data Loss: Automated Backups for Your Working Directory</h1>
+    <div class="meta">
+        Published: February 10, 2026 &middot; 3-part guide &middot; Updated: February 12, 2026
+    </div>
+
+    <div class="progress">
+        <div class="progress-step active"></div>
+        <div class="progress-step active"></div>
+        <div class="progress-step active"></div>
+    </div>
+
+    <h2>Part 3 of 3 — Make It Persistent</h2>
+
+    <p>Your backup script now runs automatically every 60 seconds. But there's one problem — if you close your terminal or your SSH session drops, the script stops. Let's fix that.</p>
+
+    <div class="step">
+        <div class="step-header">Launch the script persistently with nohup</div>
+        <p>Use <code>nohup</code> to run the backup script in the background. This ensures the process continues running even if you disconnect from the server or close your terminal window.</p>
+        <pre>nohup bash backup.sh &gt; /dev/null 2&gt;&amp;1 &amp;</pre>
+        <p>This sends the script to the background and detaches it from your terminal session. The backup process will keep running until the server is restarted or you manually stop it.</p>
+        <p>You can verify it's running with:</p>
+        <pre>ps aux | grep backup.sh</pre>
+    </div>
+
+    <div class="success-box">
+        <strong>Setup complete!</strong>
+        <p>Your automated backup system is now running. A new timestamped zip of your working directory will be created every 60 seconds, and it will continue running even after you disconnect. You can check for new backup files appearing in your directory to confirm everything is working.</p>
+    </div>
+
+    <div class="author-box">
+        <div class="author-avatar">MK</div>
+        <div class="author-info">
+            <strong>Marcus Kim</strong><br>
+            SRE @ CloudScale &middot; Writing about DevOps, infrastructure, and keeping servers happy.
+        </div>
+    </div>
+
+    <div class="tags">
+        <span>linux</span>
+        <span>backup</span>
+        <span>bash</span>
+        <span>devops</span>
+        <span>sysadmin</span>
+    </div>
+</body>
+</html>
